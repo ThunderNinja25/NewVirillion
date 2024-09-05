@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private InventoryUI inventoryUI;
 
-    GameState state;
+    private GameState state;
 
-    MenuController menuController;
+    private MenuController menuController;
 
     private void Awake()
     {
@@ -44,13 +44,14 @@ public class GameManager : MonoBehaviour
         }
         else if(state == GameState.BAG)
         {
+            
             Action onBack = () =>
             {
                 inventoryUI.gameObject.SetActive(false);
                 state = GameState.FREEROAM;
             };
-
             inventoryUI.HandleUpdate(onBack);
+
         }
     }
 
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
         {
             inventoryUI.gameObject.SetActive(true);
             state = GameState.BAG;
+            
         }
         else if (selectedItem == 2)
         {

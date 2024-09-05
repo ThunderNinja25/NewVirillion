@@ -8,17 +8,17 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] GameObject itemList;
-    [SerializeField] ItemSlotUI itemSlotUI;
+    [SerializeField] private GameObject itemList;
+    [SerializeField] private ItemSlotUI itemSlotUI;
 
-    [SerializeField] Image itemIcon;
-    [SerializeField] TextMeshProUGUI itemDescription;
+    [SerializeField] private Image itemIcon;
+    [SerializeField] private TextMeshProUGUI itemDescription;
 
-    int selectedItem;
+    private int selectedItem;
 
-    List<ItemSlotUI> slotUIList;
+    private List<ItemSlotUI> slotUIList;
 
-    Inventory inventory;
+    private Inventory inventory;
     private void Awake()
     {
         inventory = Inventory.GetInventory();
