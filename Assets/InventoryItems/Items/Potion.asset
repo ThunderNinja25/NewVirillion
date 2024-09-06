@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0aea84fcf3e4448bd5c8aca828fd43, type: 3}
   m_Name: Potion
   m_EditorClassIdentifier: 
-  name: Potion
+  itemName: Potion
   description: Recovers 25HP to the Player
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: a38de2af0ebcd1d438398af9491043ac, type: 3}
   hpAmount: 25
   restoreMaxHP: 0

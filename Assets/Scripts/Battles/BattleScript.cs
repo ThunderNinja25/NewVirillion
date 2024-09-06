@@ -25,11 +25,17 @@ public class BattleScript : MonoBehaviour
     [SerializeField] private PlayerInputUI uiSwitch;
 
     public BattleState state;
+
+    [SerializeField] private Camera playerCamera;
+
+    public SceneLoader loader;
     // Start is called before the first frame update
     void Start()
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());
+        playerCamera = FindObjectOfType<Camera>();
+        playerCamera.gameObject.SetActive(false);
     }
 
     IEnumerator SetupBattle()
@@ -107,6 +113,7 @@ public class BattleScript : MonoBehaviour
         {
             dialogueText.text = "You were defeated.";
         }
+        loader.ReturnToFreeroam();
     }
 
     private void PlayerTurn()

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40ecc7922414ebd45976c0375ff00f92, type: 3}
-  m_Name: GreatSword
+  m_Name: LaserSword
   m_EditorClassIdentifier: 
-  weaponName: The Great Sword
-  weaponDescription: 10 HP The Great Sword that gave you great power
+  weaponName: Laser Sword
+  weaponDescription: 20 HP A high-tech weapon from an era that is yet to come
   weaponIcon: {fileID: 0}
-  damageDealt: 10
+  damageDealt: 20

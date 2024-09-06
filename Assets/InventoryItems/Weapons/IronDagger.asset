@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40ecc7922414ebd45976c0375ff00f92, type: 3}
-  m_Name: GreatSword
+  m_Name: IronDagger
   m_EditorClassIdentifier: 
-  weaponName: The Great Sword
-  weaponDescription: 10 HP The Great Sword that gave you great power
+  weaponName: Iron Dagger
+  weaponDescription: 10 HP An Iron Dagger given to you by your new allies
   weaponIcon: {fileID: 0}
   damageDealt: 10

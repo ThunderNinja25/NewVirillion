@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +13,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI itemDescription;
 
-    private int selectedItem;
+    private int selectedItem = 0;
 
     private List<ItemSlotUI> slotUIList;
 
@@ -68,6 +67,7 @@ public class InventoryUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             onBack?.Invoke();
+            gameObject.SetActive(false);
         }
     }
 

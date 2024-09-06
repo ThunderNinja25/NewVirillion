@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 11967871408699875}
   - component: {fileID: 7565795357134036984}
   - component: {fileID: 3728725360730586810}
+  - component: {fileID: 8733358590062839876}
   - component: {fileID: 2109087631970228877}
   - component: {fileID: 1557458613233881194}
   - component: {fileID: 8220476349146240970}
@@ -122,6 +123,23 @@ MonoBehaviour:
   damage: 10
   maxHealth: 25
   currentHealth: 0
+--- !u!114 &8733358590062839876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946671111203662634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc2675b2f6861e4d902db04fb787f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - weapon: {fileID: 11400000, guid: 8bff04107204ec046960b34faf28a5e9, type: 2}
+    count: 0
+  - weapon: {fileID: 11400000, guid: 8d1ff52f72edc4540a635999cbd04479, type: 2}
+    count: 0
 --- !u!114 &2109087631970228877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,10 +154,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slots:
   - item: {fileID: 11400000, guid: dc33ecac6342e89439ec4231e063de37, type: 2}
-    count: 2
-  - item: {fileID: 11400000, guid: 448dfe86ce5418a4ebb75d86089af98e, type: 2}
-    count: 3
-  - item: {fileID: 11400000, guid: 464055c68b993e647b104e03cde0d4fa, type: 2}
     count: 1
 --- !u!50 &1557458613233881194
 Rigidbody2D:
@@ -167,7 +181,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &8220476349146240970
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

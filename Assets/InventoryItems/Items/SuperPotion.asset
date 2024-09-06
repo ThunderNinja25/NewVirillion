@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0aea84fcf3e4448bd5c8aca828fd43, type: 3}
   m_Name: SuperPotion
   m_EditorClassIdentifier: 
-  name: Super Potion
+  itemName: Super Potion
   description: Recovers 50HP to the Player
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 384681ec1344ebe478ee0adbf07f605a, type: 3}
   hpAmount: 50
   restoreMaxHP: 0

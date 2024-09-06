@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,10 +9,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float playerSpeed;
     [SerializeField] private Rigidbody2D rb;
 
+    public event Action<Collider2D> OnEnterEnemyView;
+
     private Vector2 movement;
 
     private Animator animator;
-
 
     private const string horizontal = "Horizontal";
     private const string vertical = "Vertical";
@@ -28,9 +31,10 @@ public class PlayerMovement : MonoBehaviour
         Move();
     }
 
-    private void Move()
+    public void Move()
     {
         movement.Set(InputManager.movement.x, InputManager.movement.y);
+        
 
         rb.velocity = movement * playerSpeed;
 
@@ -41,6 +45,35 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetFloat(lastHorizontal, movement.x);
             animator.SetFloat(lastVertical, movement.y);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Interact();
+        }
+        OnMove();
+    }
+
+    public void Interact()
+    {
+        var facingDir = new Vector3(animator.GetFloat(horizontal), animator.GetFloat(vertical));
+        var interactPos = transform.position + facingDir;
+
+        Debug.DrawLine(transform.position, interactPos, Color.green, 0.5f);
+    }
+
+    public void OnMove()
+    {
+        CheckIfInEnemyView();
+    }
+
+    private void CheckIfInEnemyView()
+    {
+        var collider = Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.FovLayer);
+        if (collider != null)
+        {
+            Debug.Log("See the player");
+            OnEnterEnemyView?.Invoke(collider);
         }
     }
 }

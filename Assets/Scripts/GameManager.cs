@@ -1,21 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public enum GameState { FREEROAM, MENU, BAG, BATTLESTART, CUTSCENE, PAUSED, DIALOGUE }
+public enum GameState { FREEROAM, MENU, BAG, WEAPONS, BATTLESTART, CUTSCENE, PAUSED, DIALOGUE }
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField] InventoryUI inventoryUI;
+    [SerializeField] WeaponsUI weaponsUI;
 
-    private GameState state;
+    GameState state;
 
-    private MenuController menuController;
+    MenuController menuController;
+
+    PlayerMovement playerMovement;
 
     private void Awake()
     {
         menuController = GetComponent<MenuController>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
     }
 
     private void Start()
@@ -25,33 +30,49 @@ public class GameManager : MonoBehaviour
             state = GameState.FREEROAM;
         };
 
+        playerMovement.OnEnterEnemyView += (Collider2D enemyCollider) =>
+        {
+            var enemy = enemyCollider.GetComponentInParent<EnemyController>();
+            if (enemy != null)
+            {
+                StartCoroutine(enemy.TriggerBattle(playerMovement));
+            }
+        };
+
         menuController.onMenuSelected += OnMenuSelected;
     }
 
     private void Update()
     {
-        if(state == GameState.FREEROAM)
+        if (state == GameState.FREEROAM)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 menuController.OpenMenu();
                 state = GameState.MENU;
             }
         }
-        else if(state == GameState.MENU)
+        else if (state == GameState.MENU)
         {
             menuController.HandleUpdate();
         }
-        else if(state == GameState.BAG)
+        else if (state == GameState.BAG)
         {
-            
             Action onBack = () =>
             {
-                inventoryUI.gameObject.SetActive(false);
+                menuController.CloseMenu();
                 state = GameState.FREEROAM;
             };
             inventoryUI.HandleUpdate(onBack);
-
+        }
+        else if(state == GameState.WEAPONS)
+        {
+            Action onBack = () =>
+            {
+                menuController.CloseMenu();
+                state = GameState.FREEROAM;
+            };
+            weaponsUI.HandleUpdate(onBack);
         }
     }
 
@@ -59,7 +80,8 @@ public class GameManager : MonoBehaviour
     {
         if(selectedItem == 0)
         {
-            //Weapons
+            weaponsUI.gameObject.SetActive(true);
+            state = GameState.WEAPONS;
         }
         else if(selectedItem == 1)
         {
@@ -75,6 +97,6 @@ public class GameManager : MonoBehaviour
         {
             //Load
         }
-        state = GameState.FREEROAM;
+        
     }
 }
