@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Player
-  characterLevel: 999
+  characterLevel: 1
   damage: 10
   maxHealth: 25
   currentHealth: 0
@@ -137,9 +137,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - weapon: {fileID: 11400000, guid: 8bff04107204ec046960b34faf28a5e9, type: 2}
-    count: 0
-  - weapon: {fileID: 11400000, guid: 8d1ff52f72edc4540a635999cbd04479, type: 2}
-    count: 0
+    damage: 5
+  - weapon: {fileID: 0}
+    damage: 0
+  - weapon: {fileID: 0}
+    damage: 0
+  - weapon: {fileID: 0}
+    damage: 0
+  - weapon: {fileID: 0}
+    damage: 0
 --- !u!114 &2109087631970228877
 MonoBehaviour:
   m_ObjectHideFlags: 0
