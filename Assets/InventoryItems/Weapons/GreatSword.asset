@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40ecc7922414ebd45976c0375ff00f92, type: 3}
   m_Name: GreatSword
   m_EditorClassIdentifier: 
-  weaponName: The Great Sword
+  weaponName: Great Sword
   weaponDescription: 10 HP The Great Sword that gave you great power
-  weaponIcon: {fileID: 0}
+  weaponIcon: {fileID: 2084996774, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
   damageDealt: 10

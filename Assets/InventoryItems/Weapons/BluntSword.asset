@@ -15,5 +15,5 @@ MonoBehaviour:
   weaponName: Blunt Sword
   weaponDescription: 7 HP A Blunt Sword you picked up off the side of the King's
     Road
-  weaponIcon: {fileID: 0}
+  weaponIcon: {fileID: -267587109, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
   damageDealt: 7

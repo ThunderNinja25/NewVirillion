@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 8147294991621099336}
   - component: {fileID: 8997082533777049367}
   - component: {fileID: 7368245825434963119}
+  - component: {fileID: 5023311105569594194}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -395,6 +396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exclamation: {fileID: 7026954587524746556}
+  fov: {fileID: 6697548662943270588}
+  loader: {fileID: 0}
+  battleScript: {fileID: 0}
 --- !u!114 &7368245825434963119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,3 +416,16 @@ MonoBehaviour:
   damage: 5
   maxHealth: 30
   currentHealth: 0
+--- !u!114 &5023311105569594194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830194303993212425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4881f89f8b930e34489bbb86116ccd4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: c6bb9e2d-fbb3-40ae-9578-2716ba05768d

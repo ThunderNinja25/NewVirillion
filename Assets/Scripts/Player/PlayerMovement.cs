@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, ISavable
 {
     [SerializeField] private float playerSpeed;
     [SerializeField] private Rigidbody2D rb;
@@ -14,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movement;
 
     private Animator animator;
+
+    [SerializeField] private GameLayers layers;
 
     private const string horizontal = "Horizontal";
     private const string vertical = "Vertical";
@@ -33,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Interact();
+        }
+
         movement.Set(InputManager.movement.x, InputManager.movement.y);
         
 
@@ -47,10 +55,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat(lastVertical, movement.y);
         }
 
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            Interact();
-        }
+        
         OnMove();
     }
 
@@ -59,12 +64,28 @@ public class PlayerMovement : MonoBehaviour
         var facingDir = new Vector3(animator.GetFloat(horizontal), animator.GetFloat(vertical));
         var interactPos = transform.position + facingDir;
 
-        Debug.DrawLine(transform.position, interactPos, Color.green, 0.5f);
+        //Debug.DrawLine(transform.position, interactPos, Color.green, 0.5f);
+
+        var collider = Physics2D.OverlapCircle(interactPos, 0.3f, layers.InteractableLayer);
+        if(collider != null)
+        {
+            collider.GetComponent<Interactable>()?.Interact();
+        }
     }
 
     public void OnMove()
     {
-        CheckIfInEnemyView();
+        var colliders = Physics2D.OverlapCircleAll(transform.position, 0.2f, GameLayers.i.TriggerableLayers);
+
+        foreach(var collider in colliders)
+        {
+            var triggerable = collider.GetComponent<IPlayerTriggerable>();
+            if(triggerable != null)
+            {
+                triggerable.OnPlayerTriggered(this);
+                break;
+            }
+        }
     }
 
     private void CheckIfInEnemyView()
@@ -75,5 +96,17 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("See the player");
             OnEnterEnemyView?.Invoke(collider);
         }
+    }
+
+    public object CaptureState()
+    {
+        float[] position = new float[] {transform.position.x, transform.position.y};
+        return position;
+    }
+
+    public void RestoreState(object state)
+    {
+        var position = (float[])state;
+        transform.position = new Vector3(position[0], position[1]);
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -8,6 +9,28 @@ public class Inventory : MonoBehaviour
     [SerializeField] private List<ItemSlot> slots;
 
     public List<ItemSlot> Slots => slots;
+
+    public ItemBase UseItem(int indexItem, CharacterSystem character)
+    {
+        var item = slots[indexItem].Item;
+        bool itemUsed = item.Use(character);
+        if(itemUsed)
+        {
+            RemoveItem(item);
+            return item;
+        }
+        return null;
+    }
+
+    public void RemoveItem(ItemBase item)
+    {
+        var itemSlot = slots.First(slot => slot.Item == item);
+        itemSlot.Count--;
+        if(itemSlot.Count == 0)
+        {
+            slots.Remove(itemSlot);
+        }
+    }
 
     public static Inventory GetInventory()
     {
@@ -22,5 +45,9 @@ public class ItemSlot
     [SerializeField] int count;
 
     public ItemBase Item => item;
-    public int Count => count;
+    public int Count 
+    {
+        get => count;
+        set => count = value;
+    }
 }

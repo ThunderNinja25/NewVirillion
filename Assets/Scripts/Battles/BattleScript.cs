@@ -24,6 +24,9 @@ public class BattleScript : MonoBehaviour
     [SerializeField] private BattleUIScript enemyUI;
     [SerializeField] private PlayerInputUI uiSwitch;
 
+    private EnemyController enemyController;
+    public bool battleLost;
+
     public BattleState state;
 
     [SerializeField] private Camera playerCamera;
@@ -32,6 +35,7 @@ public class BattleScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemyController = FindObjectOfType<EnemyController>();
         state = BattleState.START;
         StartCoroutine(SetupBattle());
         playerCamera = FindObjectOfType<Camera>();
@@ -108,10 +112,12 @@ public class BattleScript : MonoBehaviour
         if(state == BattleState.WON)
         {
             dialogueText.text = "You won the battle!";
+            battleLost = true;
         }
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "You were defeated.";
+            battleLost = false;
         }
         loader.ReturnToFreeroam();
     }
@@ -158,6 +164,7 @@ public class BattleScript : MonoBehaviour
             return;
 
         uiSwitch.ShowBackpack();
-        //StartCoroutine(PlayerHeal());
+        StartCoroutine(PlayerHeal());
+        uiSwitch.DisableBackpack();
     }
 }

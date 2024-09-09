@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Laser Sword
   weaponDescription: 20 HP A high-tech weapon from an era that is yet to come
-  weaponIcon: {fileID: 0}
+  weaponIcon: {fileID: -1259760662, guid: 6eb16e372762d6b4cb708c44ebfab931, type: 3}
   damageDealt: 20

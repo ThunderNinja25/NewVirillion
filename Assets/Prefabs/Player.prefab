@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3728725360730586810}
   - component: {fileID: 8733358590062839876}
   - component: {fileID: 2109087631970228877}
+  - component: {fileID: 2084168917319677775}
   - component: {fileID: 1557458613233881194}
   - component: {fileID: 8220476349146240970}
   - component: {fileID: 9196161419479823695}
@@ -106,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 5
   rb: {fileID: 1557458613233881194}
+  layers: {fileID: 0}
 --- !u!114 &3728725360730586810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +163,19 @@ MonoBehaviour:
   slots:
   - item: {fileID: 11400000, guid: dc33ecac6342e89439ec4231e063de37, type: 2}
     count: 1
+--- !u!114 &2084168917319677775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946671111203662634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4881f89f8b930e34489bbb86116ccd4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 
 --- !u!50 &1557458613233881194
 Rigidbody2D:
   serializedVersion: 4
@@ -262,7 +277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5061104042460149642
 Transform:
   m_ObjectHideFlags: 0
@@ -288,7 +303,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

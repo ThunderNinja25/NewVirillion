@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] WeaponsUI weaponsUI;
+    [SerializeField] InputManager inputManager;
 
     GameState state;
 
@@ -40,10 +41,30 @@ public class GameManager : MonoBehaviour
         };
 
         menuController.onMenuSelected += OnMenuSelected;
+        DialogueManager.Instance.OnShowDialogue += () =>
+        {
+            state = GameState.DIALOGUE;
+        };
+
+        DialogueManager.Instance.OnCloseDialogue += () =>
+        {
+            if(state == GameState.DIALOGUE)
+            {
+                state = GameState.FREEROAM;
+            }
+        };
     }
 
     private void Update()
     {
+        if(state != GameState.FREEROAM)
+        {
+            inputManager.moveAction.Reset();
+        }
+        else
+        {
+            inputManager.gameObject.SetActive(true);
+        }
         if (state == GameState.FREEROAM)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -51,6 +72,10 @@ public class GameManager : MonoBehaviour
                 menuController.OpenMenu();
                 state = GameState.MENU;
             }
+        }
+        else if (state == GameState.DIALOGUE)
+        {
+            DialogueManager.Instance.HandleUpdate();
         }
         else if (state == GameState.MENU)
         {
@@ -91,12 +116,11 @@ public class GameManager : MonoBehaviour
         }
         else if (selectedItem == 2)
         {
-            //Save
+            SavingSystem.i.Save("saveSlot1");
         }
         else if((selectedItem == 3))
         {
-            //Load
+            SavingSystem.i.Load("saveSlot1");
         }
-        
     }
 }

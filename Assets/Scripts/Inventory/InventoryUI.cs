@@ -18,9 +18,11 @@ public class InventoryUI : MonoBehaviour
     private List<ItemSlotUI> slotUIList;
 
     private Inventory inventory;
+    private CharacterSystem characterSystem;
     private void Awake()
     {
         inventory = Inventory.GetInventory();
+        characterSystem = GetComponent<CharacterSystem>();
     }
 
     private void Start()
@@ -63,6 +65,10 @@ public class InventoryUI : MonoBehaviour
         {
             UpdateItemSelection();
         }
+        Action onSelected = () =>
+        {
+            inventory.UseItem(selectedItem, characterSystem);
+        };
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
