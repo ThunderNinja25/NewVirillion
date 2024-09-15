@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
+using System;
 
 public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON,LOST }
 
@@ -14,6 +14,8 @@ public class BattleScript : MonoBehaviour
 
     [SerializeField] private Transform playerBattleSpawn;
     [SerializeField] private Transform enemyBattleSpawn;
+    [SerializeField] private Image playerSprite;
+    [SerializeField] private Image enemySprite;
 
     private CharacterSystem playerSystem;
     private CharacterSystem enemySystem;
@@ -24,22 +26,18 @@ public class BattleScript : MonoBehaviour
     [SerializeField] private BattleUIScript enemyUI;
     [SerializeField] private PlayerInputUI uiSwitch;
 
-    private EnemyController enemyController;
-    public bool battleLost;
+    public bool battleOver;
 
     public BattleState state;
 
-    [SerializeField] private Camera playerCamera;
-
-    public SceneLoader loader;
-    // Start is called before the first frame update
     void Start()
     {
-        enemyController = FindObjectOfType<EnemyController>();
         state = BattleState.START;
+    }
+
+    public void StartBattle()
+    {
         StartCoroutine(SetupBattle());
-        playerCamera = FindObjectOfType<Camera>();
-        playerCamera.gameObject.SetActive(false);
     }
 
     IEnumerator SetupBattle()
@@ -51,6 +49,9 @@ public class BattleScript : MonoBehaviour
         GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleSpawn);
         enemySystem = enemyGO.GetComponent<CharacterSystem>();
         enemySystem.currentHealth = enemySystem.maxHealth;
+
+        playerSprite.sprite = playerSystem.PlayerSprite;
+        enemySprite.sprite = enemySystem.EnemySprite;
 
         dialogueText.text = enemySystem.characterName + " approaches...";
 
@@ -74,7 +75,11 @@ public class BattleScript : MonoBehaviour
         if(isDead)
         {
             state = BattleState.WON;
+            gameObject.SetActive(false);
             EndBattle();
+            yield return new WaitForSeconds(2);
+            battleOver = true;
+            
         }
         else
         {
@@ -99,6 +104,9 @@ public class BattleScript : MonoBehaviour
         {
             state = BattleState.LOST;
             EndBattle();
+            yield return new WaitForSeconds(2);
+            battleOver = true;
+            
         }
         else
         {
@@ -109,17 +117,20 @@ public class BattleScript : MonoBehaviour
 
     private void EndBattle()
     {
+        
         if(state == BattleState.WON)
         {
             dialogueText.text = "You won the battle!";
-            battleLost = true;
+            state = BattleState.START;
+            battleOver = true;
         }
         else if (state == BattleState.LOST)
         {
             dialogueText.text = "You were defeated.";
-            battleLost = false;
+            state = BattleState.START;
+            battleOver = true;
         }
-        loader.ReturnToFreeroam();
+        GameManager.Instance.EndBattle();
     }
 
     private void PlayerTurn()

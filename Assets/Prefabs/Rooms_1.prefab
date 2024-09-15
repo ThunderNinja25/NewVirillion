@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5466424891987734942}
   - component: {fileID: 6945485337157935963}
   - component: {fileID: 2858160042832115904}
-  - component: {fileID: 734226793288299526}
   m_Layer: 10
   m_Name: Portal
   m_TagString: Untagged
@@ -96,6 +95,7 @@ MonoBehaviour:
   sceneSelection: 0
   destinationPortal: 0
   spawnPoint: {fileID: 4136400501594391861}
+  player: {fileID: 0}
 --- !u!114 &2858160042832115904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,18 +112,6 @@ MonoBehaviour:
   fadeIn: 0
   fadeOut: 0
   timeToFade: 1
---- !u!114 &734226793288299526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3369297632335168970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ce912adeb474554bbd5275492193b1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3640189144056294578
 GameObject:
   m_ObjectHideFlags: 0

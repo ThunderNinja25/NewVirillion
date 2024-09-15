@@ -7,27 +7,13 @@ using UnityEngine.SceneManagement;
 public class SceneSwitch : MonoBehaviour, IPlayerTriggerable
 {
     [SerializeField] private int sceneSelection;
-    [SerializeField] DestinationIdentifier destinationPortal;
-    [SerializeField] private Transform spawnPoint;
-    PlayerMovement player;
-    FadeInOut fade;
+    [SerializeField] public DestinationIdentifier destinationPortal;
+    [SerializeField] public Transform spawnPoint;
+    public PlayerMovement player;
 
     private void Start()
     {
-        fade = FindObjectOfType<FadeInOut>();
-    }
-
-    public IEnumerator ChangeScene()
-    {
-        DontDestroyOnLoad(gameObject);
-
-        fade.FadeIn();
-        yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(sceneSelection);
-
-        var destinationPortal = FindObjectsOfType<SceneSwitch>().First(x => x != this && x.destinationPortal == this.destinationPortal);
-        player.transform.position = destinationPortal.SpawnPoint.position;
-        Destroy(gameObject);
+        GameObject.Find("GameManager");
     }
 
     public Transform SpawnPoint => spawnPoint;
@@ -35,7 +21,7 @@ public class SceneSwitch : MonoBehaviour, IPlayerTriggerable
     public void OnPlayerTriggered(PlayerMovement player)
     {
         this.player = player;
-        StartCoroutine (ChangeScene());
+        GameManager.Instance.StartChangeScene(sceneSelection, destinationPortal);
     }
 }
 

@@ -2265,7 +2265,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rooms_1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6945485337157935963, guid: abe9e4b2eb8dce24fb2fbc97d0de8bbb,
+        type: 3}
+      propertyPath: sceneSelection
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 734226793288299526, guid: abe9e4b2eb8dce24fb2fbc97d0de8bbb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

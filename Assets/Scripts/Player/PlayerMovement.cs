@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 
 public class PlayerMovement : MonoBehaviour, ISavable
@@ -10,7 +11,7 @@ public class PlayerMovement : MonoBehaviour, ISavable
     [SerializeField] private float playerSpeed;
     [SerializeField] private Rigidbody2D rb;
 
-    public event Action<Collider2D> OnEnterEnemyView;
+    public UnityEvent<Collider2D> OnEnterEnemyView = new UnityEvent<Collider2D>();
 
     private Vector2 movement;
 
@@ -75,6 +76,7 @@ public class PlayerMovement : MonoBehaviour, ISavable
 
     public void OnMove()
     {
+        CheckIfInEnemyView();
         var colliders = Physics2D.OverlapCircleAll(transform.position, 0.2f, GameLayers.i.TriggerableLayers);
 
         foreach(var collider in colliders)
@@ -93,9 +95,14 @@ public class PlayerMovement : MonoBehaviour, ISavable
         var collider = Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.FovLayer);
         if (collider != null)
         {
-            Debug.Log("See the player");
             OnEnterEnemyView?.Invoke(collider);
+            var enemy = collider.GetComponentInParent<EnemyController>();
+            if (enemy != null)
+            {
+                StartCoroutine(enemy.TriggerBattle(this));
+            }
         }
+
     }
 
     public object CaptureState()

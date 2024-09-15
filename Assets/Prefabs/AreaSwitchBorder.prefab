@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneSelection: 4
+  destinationPortal: 2
   spawnPoint: {fileID: 7593747219652814165}
 --- !u!114 &6996184279302160927
 MonoBehaviour:

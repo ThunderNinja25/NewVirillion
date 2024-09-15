@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3603963594376455415}
   - component: {fileID: 3688399761766952184}
   - component: {fileID: 4116415447340376517}
-  - component: {fileID: 7774741962915002871}
   m_Layer: 10
   m_Name: PlayerHouseEntrance
   m_TagString: Untagged
@@ -94,7 +93,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneSelection: 2
+  destinationPortal: 0
   spawnPoint: {fileID: 1166503873191268967}
+  player: {fileID: 0}
 --- !u!114 &4116415447340376517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,18 +112,6 @@ MonoBehaviour:
   fadeIn: 0
   fadeOut: 0
   timeToFade: 1
---- !u!114 &7774741962915002871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 652469050166169451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ce912adeb474554bbd5275492193b1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1329173404825904173
 GameObject:
   m_ObjectHideFlags: 0

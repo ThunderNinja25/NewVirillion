@@ -11,7 +11,7 @@ public class FadeInOut : MonoBehaviour
 
     public float timeToFade;
 
-    private void Awake()
+    private void Start()
     {
         canvasGroup = FindObjectOfType<CanvasGroup>();
     }
@@ -34,7 +34,7 @@ public class FadeInOut : MonoBehaviour
             if (canvasGroup.alpha >= 0)
             {
                 canvasGroup.alpha -= timeToFade * Time.deltaTime;
-                if (canvasGroup.alpha == 0)
+                if (canvasGroup.alpha <= 0.001)
                 {
                     fadeOut = false;
                 }

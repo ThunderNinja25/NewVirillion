@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState { FREEROAM, MENU, BAG, WEAPONS, BATTLESTART, CUTSCENE, PAUSED, DIALOGUE }
 
@@ -11,33 +13,29 @@ public class GameManager : MonoBehaviour
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] WeaponsUI weaponsUI;
     [SerializeField] InputManager inputManager;
+    [SerializeField] private BattleScript battleScript;
+    [SerializeField] private MenuController menuController;
+    [SerializeField] private PlayerMovement playerMovement;
 
-    GameState state;
+    public GameState state;
 
-    MenuController menuController;
+    FadeInOut fade;
 
-    PlayerMovement playerMovement;
+    private bool transitioning;
 
+    public static GameManager Instance { get; private set; }
     private void Awake()
     {
-        menuController = GetComponent<MenuController>();
-        playerMovement = FindObjectOfType<PlayerMovement>();
+        Instance = this;
+        
     }
 
     private void Start()
     {
+        fade = FindObjectOfType<FadeInOut>();
         menuController.onBack += () =>
         {
             state = GameState.FREEROAM;
-        };
-
-        playerMovement.OnEnterEnemyView += (Collider2D enemyCollider) =>
-        {
-            var enemy = enemyCollider.GetComponentInParent<EnemyController>();
-            if (enemy != null)
-            {
-                StartCoroutine(enemy.TriggerBattle(playerMovement));
-            }
         };
 
         menuController.onMenuSelected += OnMenuSelected;
@@ -122,5 +120,58 @@ public class GameManager : MonoBehaviour
         {
             SavingSystem.i.Load("saveSlot1");
         }
+    }
+
+    public void StartCutsceneState()
+    {
+        state = GameState.CUTSCENE;
+    }
+
+    public void StartFreeroam()
+    {
+        state = GameState.FREEROAM;
+    }
+
+    public void GetBattleSystem()
+    {
+        battleScript.GetComponentInChildren<BattleScript>();
+    }
+
+    public void StartBattle()
+    {
+        state = GameState.BATTLESTART;
+        battleScript.gameObject.SetActive(true);
+        battleScript.StartBattle();
+    }
+
+    public void EndBattle()
+    {
+        if (battleScript.battleOver)
+        {
+            battleScript.gameObject.SetActive(false);
+            state = GameState.FREEROAM;
+        }
+    }
+
+    public IEnumerator ChangeScene(int sceneSelection, DestinationIdentifier destinationPortal)
+    {
+        if (!transitioning)
+        {
+            transitioning = true;
+            fade.FadeIn();
+            yield return new WaitForSeconds(2);
+            AsyncOperation op = SceneManager.LoadSceneAsync(sceneSelection);
+            yield return op;
+            var destinationPortals = FindObjectsOfType<SceneSwitch>().First(x => x != this && x.destinationPortal == destinationPortal);
+            playerMovement.transform.position = destinationPortals.SpawnPoint.position;
+            transitioning = false;
+            fade.FadeOut();
+        }
+        
+    }
+
+    public void StartChangeScene(int sceneSelection, DestinationIdentifier destinationPortal)
+    {
+        StartCoroutine(ChangeScene(sceneSelection, destinationPortal));
     }
 }

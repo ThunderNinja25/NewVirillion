@@ -13,6 +13,9 @@ public class CharacterSystem : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
 
+    public Sprite playerSprite;
+    public Sprite enemySprite;
+
     public bool TakeDamage(int dmg)
     {
         currentHealth -= dmg;
@@ -32,5 +35,15 @@ public class CharacterSystem : MonoBehaviour
         {
             currentHealth = maxHealth;
         }
+    }
+
+    public Sprite PlayerSprite
+    {
+        get => playerSprite;
+    }
+
+    public Sprite EnemySprite
+    {
+        get => enemySprite;
     }
 }
