@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MenuController menuController;
     [SerializeField] private PlayerMovement playerMovement;
 
+    public EnemyController enemyController;
+
     public GameState state;
 
     FadeInOut fade;
@@ -55,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(state != GameState.FREEROAM)
+        if (state != GameState.FREEROAM)
         {
             inputManager.moveAction.Reset();
         }
@@ -134,7 +136,8 @@ public class GameManager : MonoBehaviour
 
     public void GetBattleSystem()
     {
-        battleScript.GetComponentInChildren<BattleScript>();
+        enemyController = FindObjectOfType<EnemyController>();
+        battleScript = enemyController.GetComponentInChildren<BattleScript>();
     }
 
     public void StartBattle()
@@ -148,6 +151,7 @@ public class GameManager : MonoBehaviour
     {
         if (battleScript.battleOver)
         {
+            Destroy(enemyController.gameObject);
             battleScript.gameObject.SetActive(false);
             state = GameState.FREEROAM;
         }

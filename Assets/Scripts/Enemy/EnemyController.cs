@@ -17,7 +17,6 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        
     }
 
     public IEnumerator TriggerBattle(PlayerMovement player)
