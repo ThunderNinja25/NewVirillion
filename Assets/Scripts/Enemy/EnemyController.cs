@@ -19,6 +19,11 @@ public class EnemyController : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
     }
 
+    public void StartBattle()
+    {
+        //StartCoroutine(TriggerBattle());
+    }
+
     public IEnumerator TriggerBattle(PlayerMovement player)
     {
         //battleScript = FindObjectOfType<BattleScript>(true);

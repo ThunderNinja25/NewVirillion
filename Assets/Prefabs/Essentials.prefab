@@ -3526,6 +3526,8 @@ MonoBehaviour:
   battleScript: {fileID: 0}
   menuController: {fileID: 1877163430739744632}
   playerMovement: {fileID: 2391744823952649523}
+  enemyController: {fileID: 0}
+  enemyControllers: []
   state: 0
 --- !u!114 &1877163430739744632
 MonoBehaviour:

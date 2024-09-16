@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
 
     public EnemyController enemyController;
+    public List<EnemyController> enemyControllers;
 
     public GameState state;
 
@@ -34,6 +35,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        enemyControllers = new List<EnemyController>(FindObjectsOfType<EnemyController>());
+        if(enemyControllers.Count > 0 )
+        {
+            Debug.Log("Enemies found: " +  enemyControllers.Count);
+        }
+        else
+        {
+            Debug.Log("No enemies found.");
+        }
         fade = FindObjectOfType<FadeInOut>();
         menuController.onBack += () =>
         {
@@ -137,11 +147,19 @@ public class GameManager : MonoBehaviour
     public void GetBattleSystem()
     {
         enemyController = FindObjectOfType<EnemyController>();
-        battleScript = enemyController.GetComponentInChildren<BattleScript>();
+        battleScript = GetComponentInChildren<BattleScript>();
     }
 
     public void StartBattle()
     {
+        foreach (EnemyController enemy in enemyControllers)
+        {
+            if(enemy != null)
+            {
+                StartCoroutine(enemyController.TriggerBattle(playerMovement));
+                Debug.Log("Battle triggered for enemy: " + enemy.name);
+            }
+        }
         state = GameState.BATTLESTART;
         battleScript.gameObject.SetActive(true);
         battleScript.StartBattle();
