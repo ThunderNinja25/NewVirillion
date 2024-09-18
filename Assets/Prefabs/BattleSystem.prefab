@@ -682,7 +682,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PlayerName
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4276fca717aec2a47a4b514a200a7dbe, type: 2}
   m_sharedMaterial: {fileID: -8512927114673234815, guid: 4276fca717aec2a47a4b514a200a7dbe,
@@ -1438,7 +1438,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EnemyLevel
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4276fca717aec2a47a4b514a200a7dbe, type: 2}
   m_sharedMaterial: {fileID: -8512927114673234815, guid: 4276fca717aec2a47a4b514a200a7dbe,
@@ -1706,7 +1706,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PlayerLevel
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4276fca717aec2a47a4b514a200a7dbe, type: 2}
   m_sharedMaterial: {fileID: -8512927114673234815, guid: 4276fca717aec2a47a4b514a200a7dbe,
@@ -2558,7 +2558,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: EnemyName
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4276fca717aec2a47a4b514a200a7dbe, type: 2}
   m_sharedMaterial: {fileID: -8512927114673234815, guid: 4276fca717aec2a47a4b514a200a7dbe,
@@ -2693,7 +2693,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dialogue Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4276fca717aec2a47a4b514a200a7dbe, type: 2}
   m_sharedMaterial: {fileID: -8512927114673234815, guid: 4276fca717aec2a47a4b514a200a7dbe,

@@ -398,9 +398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exclamation: {fileID: 7026954587524746556}
   fov: {fileID: 6697548662943270588}
-  battleSystem: {fileID: 7771373240242496500, guid: 2ef77891b9334e04493bab8b7133919c,
-    type: 3}
-  battleScript: {fileID: 7955637322599637065, guid: 2ef77891b9334e04493bab8b7133919c,
+  battleSystem: {fileID: 7955637322599637065, guid: 2ef77891b9334e04493bab8b7133919c,
     type: 3}
   gameManager: {fileID: 0}
 --- !u!114 &7368245825434963119

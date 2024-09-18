@@ -25,4 +25,4 @@ public class SceneSwitch : MonoBehaviour, IPlayerTriggerable
     }
 }
 
-public enum DestinationIdentifier { A, B, C, D };
+public enum DestinationIdentifier { A, B, C, D, E, F, G, H, I };

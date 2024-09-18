@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] WeaponsUI weaponsUI;
     [SerializeField] InputManager inputManager;
-    [SerializeField] private BattleScript battleScript;
+    [SerializeField] public BattleScript battleScript;
     [SerializeField] private MenuController menuController;
     [SerializeField] private PlayerMovement playerMovement;
 
@@ -144,22 +144,16 @@ public class GameManager : MonoBehaviour
         state = GameState.FREEROAM;
     }
 
-    public void GetBattleSystem()
-    {
-        enemyController = FindObjectOfType<EnemyController>();
-        battleScript = GetComponentInChildren<BattleScript>();
-    }
-
     public void StartBattle()
     {
-        foreach (EnemyController enemy in enemyControllers)
-        {
-            if(enemy != null)
-            {
-                StartCoroutine(enemyController.TriggerBattle(playerMovement));
-                Debug.Log("Battle triggered for enemy: " + enemy.name);
-            }
-        }
+        //foreach (EnemyController enemy in enemyControllers)
+        //{
+        //    if(enemy != null)
+        //    {
+        //        StartCoroutine(enemyController.TriggerBattle(playerMovement));
+        //        Debug.Log("Battle triggered for enemy: " + enemy.name);
+        //    }
+        //}
         state = GameState.BATTLESTART;
         battleScript.gameObject.SetActive(true);
         battleScript.StartBattle();

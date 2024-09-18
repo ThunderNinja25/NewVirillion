@@ -7,9 +7,8 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private GameObject exclamation;
     [SerializeField] private GameObject fov;
-    [SerializeField] private GameObject battleSystem;
+    [SerializeField] private BattleScript battleSystem;
 
-    public BattleScript battleScript;
     [SerializeField] private GameManager gameManager;
 
     //public bool battleLost;
@@ -30,9 +29,10 @@ public class EnemyController : MonoBehaviour
         exclamation.SetActive(true);
         fov.SetActive(false);
         yield return new WaitForSeconds(2f);
-        battleSystem.SetActive(true);
         exclamation.SetActive(false);
-        gameManager.GetBattleSystem();
+        battleSystem.gameObject.SetActive(true);
+        gameManager.battleScript = battleSystem;
+        gameManager.enemyController = this;
         gameManager.StartBattle();
     }
 }

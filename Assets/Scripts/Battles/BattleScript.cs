@@ -50,13 +50,13 @@ public class BattleScript : MonoBehaviour
         enemySystem = enemyGO.GetComponent<CharacterSystem>();
         enemySystem.currentHealth = enemySystem.maxHealth;
 
-        playerSprite.sprite = playerSystem.PlayerSprite;
+        //playerSprite.sprite = playerSystem.PlayerSprite;
         enemySprite.sprite = enemySystem.EnemySprite;
-
-        dialogueText.text = enemySystem.characterName + " approaches...";
 
         playerUI.SetUI(playerSystem);
         enemyUI.SetUI(enemySystem);
+
+        dialogueText.text = enemySystem.characterName + " approaches...";
 
         yield return new WaitForSeconds(2);
 
